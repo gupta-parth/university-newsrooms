@@ -21,6 +21,8 @@ class UofTSpider(scrapy.Spider):
             return text.strip()
 
         yield {
-            "name": response.css("div.pane-content h1::text").get().strip(),
-            "content": clean_text("div.row div.pane-content p::text")
+            "Name": response.css("div.pane-content h1::text").get().strip(),
+            "Date": response.css("div.date::text").get(),
+            "Content": clean_text("div.row div.pane-content p::text"),
+            "Tags": response.css("div.Tags div.pane-content a::text").getall()
         }
